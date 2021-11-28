@@ -124,7 +124,7 @@ class get_strava_data():
 x = get_strava_data(path = r"C:\Users\norma\chromedriver.exe",
                 website= 'https://www.strava.com/athlete/training',
                 user = 'nomueller@uni-osnabrueck.de',
-                pw = 'Kroos92m.'
+                pw = ''
                  )
 
 print(x.transform_data())
