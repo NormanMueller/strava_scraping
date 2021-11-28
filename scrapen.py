@@ -5,22 +5,25 @@ from selenium import webdriver
 import pandas as pd
 import os
 from selenium.webdriver.common.keys import Keys
+
 def get_data():
-  
+    """ 
      op = webdriver.ChromeOptions()
      op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
      op.add_argument("--headless")
      op.add_argument("--no-sandbox")
      op.add_argument("--disable-dev-shm-usage")
      op.add_argument("--disable-gpu")
-     driver = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"), chrome_options = op)
+     driver = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"), chrome_options = op) """
 
-    driver.get('https://www.strava.com/login')
+    path= r"C:\Users\norma\chromedriver.exe"
+    driver = webdriver.Chrome(path) 
+    driver.get('https://www.strava.com/athlete/training')
     import time
     #### Login
     time.sleep(2)
     user = ''
-    pw= '.'
+    pw=  ''
     search = driver.find_element_by_id("email")
     search.clear()
     search.send_keys(user)
@@ -29,8 +32,9 @@ def get_data():
     search2.send_keys(pw)
     time.sleep(1)
     login= driver.find_element_by_id("login-button")
+    login.click()
     ####/ login
-
+    time.sleep(2)
     ### Aktivitäten
     driver.get('https://www.strava.com/athlete/training')
     driver.set_window_size(800, 600)
@@ -38,8 +42,9 @@ def get_data():
 
 
     ### Aktivität einzeln
-    table = driver.find_element_by_css_selector("#search-results")
+    table = driver.find_element_by_id("search-results")
     time.sleep(2)
+    
     spalten = ['td.view-col.col-type','td.view-col.col-dist','td.view-col.col-date','td.view-col.col-time']
     dist=[]
     date=[]
